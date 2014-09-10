@@ -65,3 +65,4 @@ puts "Enter upper bound: "
 upper_bound = gets.chomp.to_f
 
 send(selected_method, absolute_tolerance, lower_bound, upper_bound, selected_function)
+
