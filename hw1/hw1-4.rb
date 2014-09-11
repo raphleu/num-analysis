@@ -1,7 +1,5 @@
 def bisection(absolute_tolerance, lower_bound, upper_bound, function)
-	if (send(function, lower_bound) * send(function, upper_bound)) > 0
-		puts "Root not bracketed!"
-	end
+	abort "Root not bracketed!" if (send(function, lower_bound) * send(function, upper_bound)) > 0
 	if send(function, lower_bound) > 0
 		temp_lower_bound = lower_bound
 		lower_bound = upper_bound
@@ -18,9 +16,7 @@ def bisection(absolute_tolerance, lower_bound, upper_bound, function)
  		end
  		number_of_iterations += 1
  	end
- 	puts "Final y value: #{new_y}"
- 	puts "Final x value: #{lower_bound + dx}"
- 	puts "Number of iterations: #{number_of_iterations}"
+ 	print_conclusion(new_y, lower_bound + dx, number_of_iterations)
 end
 
 
@@ -36,16 +32,46 @@ def secant(absolute_tolerance, lower_bound, upper_bound, function)
 		new_y = send(function, upper_bound)
 		number_of_iterations += 1
 	end
-	puts "Final y value: #{new_y}"
-	puts "Final x value: #{upper_bound}"
-	puts "Number of iterations: #{number_of_iterations}"
+	print_conclusion(new_y, upper_bound, number_of_iterations)
 end
 
 def false_position(absolute_tolerance, lower_bound, upper_bound, function)
+	number_of_iterations = 0
+	old_y = send(function, lower_bound)
+	new_y = send(function, upper_bound)
+	abort "Root not bracketed!" if old_y * new_y > 0
+	if old_y > 0
+		temp_lower_bound = lower_bound
+		lower_bound = upper_bound 	
+		upper_bound = temp_lower_bound
+		temp_old_y = old_y
+		old_y = new_y
+		new_y = temp_old_y	
+	end
+	new_val = 1 + absolute_tolerance
+	until new_val.abs < absolute_tolerance
+		new_x = lower_bound + (upper_bound - lower_bound) * old_y / (old_y - new_y)
+		new_val = send(function, new_x) 
+		if send(function, new_x) < 0
+			lower_bound = new_x
+			old_y = new_val
+		else
+			upper_bound = new_x
+			new_y = new_val
+		end
+		number_of_iterations += 1
+	end
+	print_conclusion(new_val, new_x, number_of_iterations)
 end
 
 def fourthroottwo(x)
 	return x**4 - 2
+end
+
+def print_conclusion(final_y, final_x, number_of_iterations)
+	puts "Final y value: #{final_y}"
+	puts "Final x value: #{final_x}"
+	puts "Number of iterations: #{number_of_iterations}"
 end
 #Here's where the stuff starts when you run the program
 
