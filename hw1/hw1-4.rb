@@ -64,8 +64,47 @@ def false_position(absolute_tolerance, lower_bound, upper_bound, function)
 	print_conclusion(new_val, new_x, number_of_iterations)
 end
 
+def fpi(absolute_tolerance, lower_bound, upper_bound, function)
+	number_of_iterations = 0
+	old_x = lower_bound
+	difference = 1 + absolute_tolerance
+	until difference.abs < absolute_tolerance
+		new_x = send(function, old_x)
+		difference = new_x - old_x
+		puts "old x: #{old_x}, new x: #{new_x}, difference: #{difference}"
+		old_x = new_x
+		number_of_iterations += 1
+	end
+	print_conclusion(difference, new_x, number_of_iterations)
+end
+
 def fourthroottwo(x)
-	return x**4 - 2
+	x**4 - 2
+end
+
+#for question 4
+def fpifunction0(x)
+	(x / 2) + (1 / x**3)
+end
+
+#for question 4
+def fpifunction1(x)
+	((2 * x) / 3 + 2 / (3 * x**3))
+end
+
+#for question 4
+def fpifunction2(x)
+	x - (0.15) * (x**4 - 2)
+end
+
+#for question 5
+def fpifunction3(x)
+	(2 * x**3 - 1) / 6.0
+end
+
+#for question 5
+def fpifunction4(x)
+	x - (2 * x**3 - 6 * x - 1) / (6 * x **2 - 6 * x)
 end
 
 def print_conclusion(final_y, final_x, number_of_iterations)
@@ -73,9 +112,10 @@ def print_conclusion(final_y, final_x, number_of_iterations)
 	puts "Final x value: #{final_x}"
 	puts "Number of iterations: #{number_of_iterations}"
 end
+
 #Here's where the stuff starts when you run the program
 
-functions = ["fourthroottwo"]
+functions = ["fourthroottwo", "fpifunction0", "fpifunction1", "fpifunction2", "fpifunction3", "fpifunction4"]
 methods = ["bisection", "secant", "false_position", "fpi"]
 
 puts "Select a function from the following: "
@@ -107,4 +147,3 @@ puts "Enter upper bound: "
 upper_bound = gets.chomp.to_f
 
 send(selected_method, absolute_tolerance, lower_bound, upper_bound, selected_function)
-
