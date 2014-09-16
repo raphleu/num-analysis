@@ -14,6 +14,7 @@ def bisection(absolute_tolerance, lower_bound, upper_bound, function)
  		if new_y < 0
  			lower_bound += dx
  		end
+ 		puts "lower bound: #{lower_bound}, upper bound: #{upper_bound}, y value: #{new_val}"
  		number_of_iterations += 1
  	end
  	print_conclusion(new_y, lower_bound + dx, number_of_iterations)
@@ -30,6 +31,7 @@ def secant(absolute_tolerance, lower_bound, upper_bound, function)
 		old_y = new_y
 		upper_bound += dx
 		new_y = send(function, upper_bound)
+		puts "lower bound: #{lower_bound}, upper bound: #{upper_bound}, y value: #{new_y}"
 		number_of_iterations += 1
 	end
 	print_conclusion(new_y, upper_bound, number_of_iterations)
@@ -59,6 +61,7 @@ def false_position(absolute_tolerance, lower_bound, upper_bound, function)
 			upper_bound = new_x
 			new_y = new_val
 		end
+		puts "lower bound: #{lower_bound}, upper bound: #{upper_bound}, y value: #{new_val}"
 		number_of_iterations += 1
 	end
 	print_conclusion(new_val, new_x, number_of_iterations)
@@ -71,7 +74,7 @@ def fpi(absolute_tolerance, lower_bound, upper_bound, function)
 	until difference.abs < absolute_tolerance
 		new_x = send(function, old_x)
 		difference = new_x - old_x
-		puts "old x: #{old_x}, new x: #{new_x}, difference: #{difference}"
+		# puts "old x: #{old_x}, new x: #{new_x}, difference: #{difference}"
 		old_x = new_x
 		number_of_iterations += 1
 	end
