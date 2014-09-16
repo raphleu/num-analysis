@@ -94,17 +94,41 @@ end
 
 #for question 4
 def fpifunction2(x)
-	x - (0.15) * (x**4 - 2)
+	x - (0.15) * (x**4 - 2.0)
 end
 
 #for question 5
 def fpifunction3(x)
-	(2 * x**3 - 1) / 6.0
+	(2.0 * x**3 - 1) / 6.0
 end
 
 #for question 5
 def fpifunction4(x)
-	x - (2 * x**3 - 6 * x - 1) / (6 * x **2 - 6 * x)
+	x - (2.0 * x**3 - 6.0 * x - 1.0) / (6.0 * x**2 - 6.0)
+end
+
+def newtonfunctionfvw(v, w)
+	v * (.04 + w)**2.0 - .0011111 * (.04 + 2.0 * w) / (w**2.0) - .083333
+end
+
+def newtonfunctiongvw(v, w)
+	-(.02) * (1.0 + v) + .00055555 * (w**(-2.0)) - w + .5 * ((1.0 - v) * w - (1.29074 * (1.0-v)**(1.0/2.0))) + 1.774598 
+end
+
+def newtonfunctiondfdv(v, w) 
+	(.04 + w)**2.0
+end
+
+def newtonfunctiondfdw(v, w)
+	v *  (.08 + 2.0 * w) + (.0022222 * w + .000088888) / w**3
+end
+
+def newtonfunctiondgdv(v, w)
+	.322685 / ((1.0 - v)**(1.0/2.0)) - .5 * w - .02
+end
+
+def newtonfunctiondgdw(v, w)
+	-(.05 * v) - .0011111 / w**3.0 - .5
 end
 
 def print_conclusion(final_y, final_x, number_of_iterations)
@@ -138,7 +162,7 @@ puts "Enter absolute_tolerance: "
 
 absolute_tolerance = gets.chomp.to_f
 
-puts "Enter lower bound: "
+puts "Enter lower bound: (for FPI this is the initial guess. upper bound will mean nothing)"
 
 lower_bound = gets.chomp.to_f
 
