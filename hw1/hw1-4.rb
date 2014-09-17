@@ -112,6 +112,11 @@ def fpifunction4(x)
 	x - (2.0 * x**3 - 6.0 * x - 1.0) / (6.0 * x**2 - 6.0)
 end
 
+#for question 5
+def fpifunction5(x)
+	x**4.0 - 3.0 * x**2.0 + x / 2.0
+end
+
 def newtonfunctionfvw(v, w)
 	v * (0.04 + w)**2.0 - 0.0011111 * (0.04 + 2.0 * w) / (w**2.0) - 0.083333
 end
@@ -144,7 +149,7 @@ end
 
 #Here's where the stuff starts when you run the program
 
-functions = ["fourthroottwo", "fpifunction0", "fpifunction1", "fpifunction2", "fpifunction3", "fpifunction4"]
+functions = ["fourthroottwo", "fpifunction0", "fpifunction1", "fpifunction2", "fpifunction3", "fpifunction4", "fpifunction5"]
 methods = ["bisection", "secant", "false_position", "fpi"]
 
 puts "Select a function from the following: "
