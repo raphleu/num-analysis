@@ -31,7 +31,7 @@ def secant(absolute_tolerance, lower_bound, upper_bound, function)
 		old_y = new_y
 		upper_bound += dx
 		new_y = send(function, upper_bound)
-		puts "lower bound: #{lower_bound}, upper bound: #{upper_bound}, y value: #{new_y}"
+		puts "xold: #{lower_bound}, xnew: #{upper_bound}, y value: #{new_y}\\\\"
 		number_of_iterations += 1
 	end
 	print_conclusion(new_y, upper_bound, number_of_iterations)
