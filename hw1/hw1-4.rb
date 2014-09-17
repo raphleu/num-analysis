@@ -38,6 +38,8 @@ def secant(absolute_tolerance, lower_bound, upper_bound, function)
 end
 
 def false_position(absolute_tolerance, lower_bound, upper_bound, function)
+	lower_bound = lower_bound.to_f
+	upper_bound = upper_bound.to_f
 	number_of_iterations = 0
 	old_y = send(function, lower_bound)
 	new_y = send(function, upper_bound)
