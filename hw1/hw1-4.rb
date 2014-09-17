@@ -117,30 +117,6 @@ def fpifunction5(x)
 	x**4.0 - 3.0 * x**2.0 + x / 2.0
 end
 
-def newtonfunctionfvw(v, w)
-	v * (0.04 + w)**2.0 - 0.0011111 * (0.04 + 2.0 * w) / (w**2.0) - 0.083333
-end
-
-def newtonfunctiongvw(v, w)
-	-(0.02) * (1.0 + v) + 0.00055555 * (w**(-2.0)) - w + 0.5 * ((1.0 - v) * w - (1.29074 * (1.0-v)**(1.0/2.0))) + 1.774598 
-end
-
-def newtonfunctiondfdv(v, w) 
-	(0.04 + w)**2.0
-end
-
-def newtonfunctiondfdw(v, w)
-	v *  (0.08 + 2.0 * w) + (0.0022222 * w + 0.000088888) / w**3
-end
-
-def newtonfunctiondgdv(v, w)
-	0.322685 / ((1.0 - v)**(1.0/2.0)) - 0.5 * w - 0.02
-end
-
-def newtonfunctiondgdw(v, w)
-	-(0.05 * v) - 0.0011111 / w**3.0 - 0.5
-end
-
 def print_conclusion(final_y, final_x, number_of_iterations)
 	puts "Final y value: #{final_y}"
 	puts "Final x value: #{final_x}"

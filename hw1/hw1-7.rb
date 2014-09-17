@@ -4,7 +4,7 @@ def taylor_series(x_val, part)
 	calculated_y = 1.0
 	previous_increment = 1.0
 	if part == 1
-		while iterations < 100 and (calculated_y - actual_y).abs > 0.000000001
+		while iterations < 100 and (calculated_y - actual_y).abs > 0.00000001
 			puts calculated_y
 			increment = previous_increment * 3.0 * x_val / (iterations + 1.0)
 			previous_increment = increment
