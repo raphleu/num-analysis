@@ -73,7 +73,7 @@ def fpi(absolute_tolerance, lower_bound, upper_bound, function)
 	number_of_iterations = 0
 	old_x = lower_bound
 	difference = 1 + absolute_tolerance
-	until difference.abs < absolute_tolerance
+	until difference.abs < absolute_tolerance or difference.nan? 
 		new_x = send(function, old_x)
 		difference = new_x - old_x
 		puts "old x: #{old_x}, new x: #{new_x}, difference: #{difference}\\\\"
