@@ -61,7 +61,7 @@ def false_position(absolute_tolerance, lower_bound, upper_bound, function)
 			upper_bound = new_x
 			new_y = new_val
 		end
-		puts "lower bound: #{lower_bound}, upper bound: #{upper_bound}, y value: #{new_val}"
+		puts "lower bound: #{lower_bound}, upper bound: #{upper_bound}, y value: #{new_val}\\\\"
 		number_of_iterations += 1
 	end
 	print_conclusion(new_val, new_x, number_of_iterations)
