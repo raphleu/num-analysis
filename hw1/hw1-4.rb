@@ -14,7 +14,7 @@ def bisection(absolute_tolerance, lower_bound, upper_bound, function)
  		if new_y < 0
  			lower_bound += dx
  		end
- 		puts "lower bound: #{lower_bound}, upper bound: #{upper_bound}, y value: #{new_y}"
+ 		puts "xmid: #{lower_bound}, y value: #{new_y}\\\\"
  		number_of_iterations += 1
  	end
  	print_conclusion(new_y, lower_bound + dx, number_of_iterations)
