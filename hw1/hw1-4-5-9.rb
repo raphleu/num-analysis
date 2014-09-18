@@ -117,6 +117,19 @@ def fpifunction5(x)
 	x**4.0 - 3.0 * x**2.0 + x / 2.0
 end
 
+#for question 9
+def radiationratefunction(x)
+	h = 6.62606957 * 10**(-34.0)
+	c = 299792458.0
+	vi = 2.083 * 10**(13)
+	t = 500.0
+	th = t / 1000.0 
+
+	puts (8.0 * Math::PI * h * vi**3 / c**3) * th**3
+
+	(8.0 * Math::PI * h * vi**3 / c**3) * th**3 * (- ((Math::E**x * (x - 3) + 3) * x**2) / (Math::E**x - 1)**2 )
+end
+
 def print_conclusion(final_y, final_x, number_of_iterations)
 	puts "Final y value: #{final_y}"
 	puts "Final x value: #{final_x}"
@@ -125,7 +138,7 @@ end
 
 #Here's where the stuff starts when you run the program
 
-functions = ["fourthroottwo", "fpifunction0", "fpifunction1", "fpifunction2", "fpifunction3", "fpifunction4", "fpifunction5"]
+functions = ["fourthroottwo", "fpifunction0", "fpifunction1", "fpifunction2", "fpifunction3", "fpifunction4", "fpifunction5", "radiationratefunction"]
 methods = ["bisection", "secant", "false_position", "fpi"]
 
 puts "Select a function from the following: "
