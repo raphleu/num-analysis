@@ -55,7 +55,11 @@ def chemfunction(x, m, xi, kj, nj)
 	x.to_f * (1 + sum_function(x, m, kj, nj)) - xi
 end
 
-def chemfunctionoveralpha(x, m, xi, kj, nj)
+def fpichemfunction(x, m, xi, kj, nj)
+	(xi.to_f - x.to_f * sum_function(x, m, kj, nj))
+end
+
+def fpichemfunctionoveralpha(x, m, xi, kj, nj)
 	alpha = 1.0
 	((1.0 / (1.0 + alpha)) * (xi.to_f + x.to_f * (alpha - sum_function(x, m, kj, nj))))
 
@@ -89,7 +93,7 @@ end
 
 #Here's where the stuff starts when you run the program
 
-functions = ["chemfunction", "chemfunctionoveralpha"]
+functions = ["chemfunction", "fpichemfunction", "fpichemfunctionoveralpha"]
 methods = ["bisection", "fpi", "newtonmethod"]
 
 puts "Select a function from the following: "
