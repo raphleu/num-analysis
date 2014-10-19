@@ -44,32 +44,28 @@ def calculate_determinant(v, w)
 	newtonfunctiondfdv(v, w) * newtonfunctiondgdw(v, w) - newtonfunctiondfdw(v, w) * newtonfunctiondgdv(v, w)
 end
 
-def onednewton(w)
-	v = 0.083333 / (0.004 + w)**2 + 0.0011111 * (0.04 + 2*w)/ w**2
-	(0.322685 / ((1.0 - v)**(1.0/2.0)) - 0.5 * w - 0.02) * v + (-(0.05 * v) - 0.0011111 / w**3.0 - 0.5)
-end
-
 def onednewtonderiv(w)
 	v = 0.0000888888/(w**3) + 0.00222222/(w**2) - 0.166666/(w + 0.04)**3
-	-0.04 * v / 2.0 + 0.0011111 * w**(-3) - 1.0 + 0.5
+	((0.322685 / ((1.0 - v)**(1.0/2.0)) - 0.5 * w - 0.02)*v + (-(0.05 * v) - 0.0011111 / w**3.0 - 0.5))
 end
 
 def newtonmethod1d(x_val)
 	iterations = 0
-	absolute_tolerance = 0.000000001
+	absolute_tolerance = 0.000000000000001
 	difference = 1 + absolute_tolerance
 	funcval = 0
 	derivval = 0
+	xold = x_val
 	until (difference.abs < absolute_tolerance)
-		xold = x_val.to_f
-		funcval = newton1d(xold).to_f
-		derivval = onednewtonderiv(xold).to_f
+		funcval = newton1d(xold)
+		derivval = onednewtonderiv(xold)
 		difference = funcval / derivval
-		lower_bound = xold - difference 
-		puts "old x: #{xold}, new x: #{lower_bound}, difference: #{difference}\\\\"
+		xold -= difference
+		puts "new x: #{xold}, difference: #{difference}\\\\"
 		iterations += 1
 	end
-	print_conclusion(difference, lower_bound, iterations)
+	v = calcv(xold)
+	print_conclusion(difference, xold, v, iterations)
 end
 
 def newton1d(w)
@@ -79,16 +75,25 @@ def newton1d(w)
 	d = 1.29074
 	n = -1.774598
 
-	w = 2.19
-
 	v = q / ((b + w)**2) + s * (b + 2.0 * w) / (w**2)
 
 	((-b / 2.0) * (1.0 + v) + (s / 2.0) * (w**(-2.0)) - w + 0.5 * ((1.0 - v) * w - d * (1 - v)**(0.5)) - n)
 end
 
-def print_conclusion(final_y, final_w, number_of_iterations)
+def calcv(w)
+	b = 0.04
+	s = 0.0011111
+	q = 0.083333
+	d = 1.29074
+	n = -1.774598
+
+	((q / (b + w)**2) + s * (b + 2 * w) / ((b + w)**2 * w**2))
+end
+
+def print_conclusion(final_y, final_w, final_v, number_of_iterations)
 	puts "Final y value: #{final_y}"
 	puts "Final w value: #{final_w}"
+	puts "Final v value: #{final_v}"
 	puts "Number of iterations: #{number_of_iterations}"
 end
 
