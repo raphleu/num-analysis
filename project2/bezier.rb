@@ -8,6 +8,7 @@
 ##input1,3,4,5 are for the cos function, varying the 4th point
 ##input6 is for the x squared function
 ##input7 is for the square root squared function
+##input8 is for the derivative of the cos function
 ##
 
 def cos_func(x)
@@ -20,6 +21,10 @@ end
 
 def square_root_squared_func(x)
 	return (5-x**2)**(1.0/2.0)
+end
+
+def derivative_of_cos_func(x)
+	return -Math.sin(0.2-x)
 end
 
 puts "Enter the name of the input file: (must be in the same directory as this program)"
@@ -38,7 +43,7 @@ File.open(file_name) do |f|
 	end
 end
 
-output_file = open("input7_with_error.csv", 'w')
+output_file = open("input8_with_error.csv", 'w')
 
 iterations = 0.0
 max_iterations = 100.0
@@ -60,8 +65,8 @@ while iterations <= max_iterations
 
 	iterations += 1.0
 
-	puts "t: #{t} #{x_out_values[0]} #{y_out_values[0]}, error: #{(square_root_squared_func(x_out_values[0]) - y_out_values[0]).abs}"
-	output_file.write("#{x_out_values[0].round(5)},#{y_out_values[0].round(5)}, error: #{(square_root_squared_func(x_out_values[0]) - y_out_values[0]).abs}\n")
+	puts "t: #{t} #{x_out_values[0]} #{y_out_values[0]}, error: #{(derivative_of_cos_func(x_out_values[0]) - y_out_values[0]).abs}"
+	output_file.write("#{x_out_values[0].round(5)},#{y_out_values[0].round(5)}, error: #{(derivative_of_cos_func(x_out_values[0]) - y_out_values[0]).abs}\n")
 end
 
 output_file.close
