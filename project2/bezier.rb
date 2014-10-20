@@ -1,10 +1,21 @@
+##
+##This code computes the bezier interpolation of points 
+##given in an input file where rows are the x value followed 
+##by the y value
+##
+##To run this program: $ruby bezier.rb
+##
+
 require 'matrix'
+
+puts "Enter the name of the input file: (must be in the same directory as this program)"
+file_name = gets.chomp
 
 x_values = []
 y_values = []
 slopes = []
 
-File.open("input2") do |f|
+File.open(file_name) do |f|
 	f.each_line do |line|
 		row = line.chomp.split(" ")
 	  x_values << row[0].to_f
@@ -12,6 +23,8 @@ File.open("input2") do |f|
 	  slopes << row[2].to_f
 	end
 end
+
+output_file = open("output1.csv", 'w')
 
 iterations = 0.0
 max_iterations = 100.0
@@ -34,4 +47,7 @@ while iterations <= max_iterations
 	iterations += 1.0
 
 	puts "t: #{t} #{x_out_values[0]} #{y_out_values[0]}"
+	output_file.write("#{x_out_values[0].round(5)},#{y_out_values[0].round(5)}\n")
 end
+
+output_file.close
