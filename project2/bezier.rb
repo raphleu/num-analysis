@@ -16,6 +16,7 @@ end
 iterations = 0.0
 max_iterations = 100.0
 n = x_values.size
+
 while iterations <= max_iterations
 
 	t =  (iterations / max_iterations)
