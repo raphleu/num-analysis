@@ -12,19 +12,19 @@
 ##
 
 def cos_func(x)
-	return -Math.cos(x-0.2)
+	return -Math.cos(x - 0.2)
 end
 
 def squared_func(x)
-	return 1-x**2
+	return 1 - x**2
 end
 
 def square_root_squared_func(x)
-	return (5-x**2)**(1.0/2.0)
+	return (5 - x**2)**(1.0 / 2.0)
 end
 
 def derivative_of_cos_func(x)
-	return -Math.sin(0.2-x)
+	return -Math.sin(0.2 - x)
 end
 
 puts "Enter the name of the input file: (must be in the same directory as this program)"
@@ -43,30 +43,52 @@ File.open(file_name) do |f|
 	end
 end
 
-output_file = open("input8_with_error.csv", 'w')
+output_file = open("output1.csv", 'w')
 
 iterations = 0.0
-max_iterations = 100.0
+max_iterations = 20.0
 n = x_values.size
 
-while iterations <= max_iterations
+(0..(n - 2)).each do |i|
 
-	t =  (iterations / max_iterations)
-	u = (1.0 - t)
-	x_out_values = x_values.dup
-	y_out_values = y_values.dup
+	interval_x_values = []
+	interval_y_values = []
+	step_size = (x_values[i + 1] - x_values[i]).abs / 3.0
 
-	(1..(n - 1)).each do |i|
-		(0..(n - i - 1)).each do |j|
-			x_out_values[j] = u * x_out_values[j] + t * x_out_values[j + 1]
-			y_out_values[j] = u * y_out_values[j] + t * y_out_values[j + 1]
-		end
+	(x_values[i]..x_values[i + 1]).step(step_size).each do |new_x|
+		interval_x_values << new_x
 	end
 
-	iterations += 1.0
+	interval_y_values << y_values[i]
+	interval_y_values << y_values[i] + slopes[i] * step_size
+	interval_y_values << y_values[i + 1] - slopes[i + 1] * step_size
+	interval_y_values << y_values[i + 1]
 
-	puts "t: #{t} #{x_out_values[0]} #{y_out_values[0]}, error: #{(derivative_of_cos_func(x_out_values[0]) - y_out_values[0]).abs}"
-	output_file.write("#{x_out_values[0].round(5)},#{y_out_values[0].round(5)}, error: #{(derivative_of_cos_func(x_out_values[0]) - y_out_values[0]).abs}\n")
+	num_interval_points = interval_x_values.size
+
+	while iterations <= max_iterations
+
+		t =  (iterations / max_iterations)
+		u = (1.0 - t)
+		x_out_values = interval_x_values.dup
+		y_out_values = interval_y_values.dup
+
+		(1..(num_interval_points - 1)).each do |i|
+			(0..(num_interval_points - i - 1)).each do |j|
+				x_out_values[j] = u * x_out_values[j] + t * x_out_values[j + 1]
+				y_out_values[j] = u * y_out_values[j] + t * y_out_values[j + 1]
+			end
+		end
+
+		iterations += 1.0
+
+		# puts "t: #{t} #{x_out_values[0]} #{y_out_values[0]}, error: #{(derivative_of_cos_func(x_out_values[0]) - y_out_values[0]).abs}"
+		puts "t: #{t} #{x_out_values[0]} #{y_out_values[0]}"
+		output_file.write("#{x_out_values[0].round(5)},#{y_out_values[0].round(5)}\n")
+		# output_file.write("#{x_out_values[0].round(5)},#{y_out_values[0].round(5)}, error: #{(derivative_of_cos_func(x_out_values[0]) - y_out_values[0]).abs}\n")
+	end
+
+	iterations = 0.0
+
 end
-
 output_file.close
