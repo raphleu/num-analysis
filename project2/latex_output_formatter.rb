@@ -1,4 +1,4 @@
-file_name = "input8_with_error.csv"
+file_name = "input7_with_error.csv"
 output_file = open("latex_" + file_name, 'w')
 
 File.open(file_name) do |f|

@@ -43,7 +43,7 @@ File.open(file_name) do |f|
 	end
 end
 
-output_file = open("output1.csv", 'w')
+output_file = open("input7_with_error.csv", 'w')
 
 iterations = 0.0
 max_iterations = 20.0
@@ -84,8 +84,8 @@ n = x_values.size
 
 		# puts "t: #{t} #{x_out_values[0]} #{y_out_values[0]}, error: #{(derivative_of_cos_func(x_out_values[0]) - y_out_values[0]).abs}"
 		puts "t: #{t} #{x_out_values[0]} #{y_out_values[0]}"
-		output_file.write("#{x_out_values[0].round(5)},#{y_out_values[0].round(5)}\n")
-		# output_file.write("#{x_out_values[0].round(5)},#{y_out_values[0].round(5)}, error: #{(derivative_of_cos_func(x_out_values[0]) - y_out_values[0]).abs}\n")
+		# output_file.write("#{x_out_values[0].round(5)},#{y_out_values[0].round(5)}\n")
+		output_file.write("#{x_out_values[0].round(5)},#{y_out_values[0].round(5)}, error: #{(square_root_squared_func(x_out_values[0]) - y_out_values[0]).abs}\n")
 	end
 
 	iterations = 0.0
